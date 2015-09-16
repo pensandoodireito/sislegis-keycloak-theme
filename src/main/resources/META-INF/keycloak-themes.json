@@ -1,0 +1,8 @@
+{
+    "themes": [
+    {
+        "name" : "sislegis_theme",
+        "types": [ "login" ]
+    }
+    ]
+}

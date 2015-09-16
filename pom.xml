@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+
+	<name>Tema para o keycloak do Sislegis</name>
+	<description>Customização do tema de login do Keycloak para o Sislegis</description>
+	<modelVersion>4.0.0</modelVersion>
+	<version>1.0</version>
+
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<issueManagement>
+		<system>Sislegis Keycloak Theme GitHub </system>
+		<url>https://github.com/pensandoodireito/sislegis-keycloak-theme/issues</url>
+	</issueManagement>
+
+
+	<artifactId>keycloak-sislegis-themes</artifactId>
+	<packaging>jar</packaging>
+
+	<build>
+		<finalName>keycloak-sislegis-themes</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>exec-maven-plugin</artifactId>
+				<groupId>org.codehaus.mojo</groupId>
+				<version>1.4.0</version>
+				<executions>
+					<execution>
+						<id>remove-sislegis-theme</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<successCodes><!-- Ignora a falha quando não existe o tema -->
+								<successCode>0</successCode>
+								<successCode>1</successCode>
+							</successCodes>
+							<executable>${JBOSS_HOME}/bin/jboss-cli.sh</executable>
+							<arguments>
+								<argument>--command=module remove
+									--name=org.keycloak.sislegis.themes
+									--resources=${project.basedir}/target/keycloak-sislegis-themes.jar</argument>
+							</arguments>
+						</configuration>
+
+					</execution>
+					<execution>
+						<id>add-sislegis-theme</id>
+						<phase>install</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>${JBOSS_HOME}/bin/jboss-cli.sh</executable>
+							<arguments>
+								<argument>--command=module add
+									--name=org.keycloak.sislegis.themes
+									--resources=${project.basedir}/target/keycloak-sislegis-themes.jar</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+	<groupId>br.gov.mj.sislegis</groupId>
+
+
+	<url>https://github.com/pensandoodireito/sislegis-keycloak-theme</url>
+	<organization>
+		<url>https://github.com/pensandoodireito</url>
+		<name>Pensando o Direito</name>
+	</organization>
+	<scm>
+		<url>https://github.com/pensandoodireito/sislegis-keycloak-theme/</url>
+		<connection>git@github.com:pensandoodireito/sislegis-keycloak-theme.git</connection>
+	</scm>
+</project>
