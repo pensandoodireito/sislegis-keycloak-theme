@@ -39,12 +39,7 @@
                                     </#if>
                                 </label>
                             </div>
-                        </#if>
-                        <div class="${properties.kcFormOptionsWrapperClass!}">
-                            <#if realm.resetPasswordAllowed>
-                                <span><a href="${url.loginPasswordResetUrl}">${msg("doForgotPassword")}</a></span>
-                            </#if>
-                        </div>
+                        </#if>                        
                     </div>
 
                     <div id="kc-form-buttons" class="${properties.kcFormButtonsClass!}">
@@ -56,21 +51,6 @@
                 </div>
             </form>
         </#if>
-    <#elseif section = "info" >
-        <#if realm.password && realm.registrationAllowed>
-            <div id="kc-registration">
-                <span>${msg("noAccount")} <a href="${url.registrationUrl}">${msg("doRegister")}</a></span>
-            </div>
-        </#if>
-
-        <#if realm.password && social.providers??>
-            <div id="kc-social-providers">
-                <ul>
-                    <#list social.providers as p>
-                        <li><a href="${p.loginUrl}" id="zocial-${p.alias}" class="zocial ${p.providerId}"> <span class="text">${p.alias}</span></a></li>
-                    </#list>
-                </ul>
-            </div>
-        </#if>
+   
     </#if>
 </@layout.registrationLayout>
