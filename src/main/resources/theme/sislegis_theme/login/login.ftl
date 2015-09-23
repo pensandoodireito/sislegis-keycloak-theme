@@ -6,50 +6,32 @@
         ${msg("loginTitleHtml",(realm.name!''))}
     <#elseif section = "form">
         <#if realm.password>
-            <form id="kc-form-login" class="${properties.kcFormClass!}" action="${url.loginAction}" method="post">
-                <div class="${properties.kcFormGroupClass!}">
-                    <div class="${properties.kcLabelWrapperClass!}">
-                        <label for="username" class="${properties.kcLabelClass!}"><#if !realm.registrationEmailAsUsername>${msg("usernameOrEmail")}<#else>${msg("email")}</#if></label>
-                    </div>
 
-                    <div class="${properties.kcInputWrapperClass!}">
-                        <input id="username" class="${properties.kcInputClass!}" name="username" value="${(login.username!'')?html}" type="text" autofocus />
-                    </div>
-                </div>
+<div class="login-box-body">
+        <p class="login-box-msg">Autentique-se para acessar o sistema</p>
+        <form action="${url.loginAction}" method="post">
+          <div class="form-group has-feedback">
+            <input id="username" name="username"  type="text" class="form-control" placeholder="Usuário" value="${(login.username!'')?html}"  autofocus >
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" name="password" id="password" class="form-control" placeholder="Senha">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+          <div class="row">
+            
+            <div class="col-xs-4">
+            <input class="btn btn-primary btn-block btn-flat" name="login" id="kc-login" type="submit" value="${msg("doLogIn")}"/>              
+            </div><!-- /.col -->
+          </div>
+        </form>
 
-                <div class="${properties.kcFormGroupClass!}">
-                    <div class="${properties.kcLabelWrapperClass!}">
-                        <label for="password" class="${properties.kcLabelClass!}">${msg("password")}</label>
-                    </div>
+      
 
-                    <div class="${properties.kcInputWrapperClass!}">
-                        <input id="password" class="${properties.kcInputClass!}" name="password" type="password" />
-                    </div>
-                </div>
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
 
-                <div class="${properties.kcFormGroupClass!}">
-                    <div id="kc-form-options" class="${properties.kcFormOptionsClass!}">
-                        <#if realm.rememberMe>
-                            <div class="checkbox">
-                                <label>
-                                    <#if login.rememberMe??>
-                                        <input id="rememberMe" name="rememberMe" type="checkbox" tabindex="3" checked> ${msg("rememberMe")}
-                                    <#else>
-                                        <input id="rememberMe" name="rememberMe" type="checkbox" tabindex="3"> ${msg("rememberMe")}
-                                    </#if>
-                                </label>
-                            </div>
-                        </#if>                        
-                    </div>
-
-                    <div id="kc-form-buttons" class="${properties.kcFormButtonsClass!}">
-                        <div class="${properties.kcFormButtonsWrapperClass!}">
-                            <input class="btn btn-primary btn-lg" name="login" id="kc-login" type="submit" value="${msg("doLogIn")}"/>
-                            <input class="btn btn-default btn-lg" name="cancel" id="kc-cancel" type="submit" value="${msg("doCancel")}"/>
-                        </div>
-                     </div>
-                </div>
-            </form>
+           
         </#if>
    
     </#if>
